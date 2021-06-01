@@ -5,11 +5,9 @@ import java.awt.event.*;
 public class Paddle extends Rectangle {
 
     int id;
-
-    int speed = 10;
     int yVelocity;
 
-    Paddle(int x, int y,int PADDLE_WIDTH, int PADDLE_HEIGHT, int id){
+    public Paddle(int x, int y,int PADDLE_WIDTH, int PADDLE_HEIGHT, int id){
 
         super(x,y,PADDLE_WIDTH,PADDLE_HEIGHT);
         this.id = id;
@@ -19,21 +17,21 @@ public class Paddle extends Rectangle {
         switch(id){
             case 1:
                 if(e.getKeyCode()==KeyEvent.VK_W){
-                    setYDirection(-speed);
+                    setYDirection(-Def.SPEED_PADDLE);
                     move();
                 }
                 if(e.getKeyCode()==KeyEvent.VK_S){
-                    setYDirection(speed);
+                    setYDirection(Def.SPEED_PADDLE);
                     move();
                 }
                 break;
             case 2:
                 if(e.getKeyCode()==KeyEvent.VK_UP){
-                    setYDirection(-speed);
+                    setYDirection(-Def.SPEED_PADDLE);
                     move();
                 }
                 if(e.getKeyCode()==KeyEvent.VK_DOWN){
-                    setYDirection(speed);
+                    setYDirection(Def.SPEED_PADDLE);
                     move();
                 }
                 break;
@@ -78,9 +76,9 @@ public class Paddle extends Rectangle {
 
     public void draw(Graphics g){
         if (id==1) {
-            g.setColor(Color.red);
+            g.setColor(Color.RED);
         } else {
-            g.setColor(Color.yellow);
+            g.setColor(Color.CYAN);
         }
 
         g.fillRect(x,y,width,height);

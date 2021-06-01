@@ -3,7 +3,7 @@ import javax.swing.*;
 
 public class GameFrame extends JFrame{
 
-    public GamePanel panel;
+    private GamePanel panel;
 
     public GameFrame(){
         panel = new GamePanel();

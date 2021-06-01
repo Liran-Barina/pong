@@ -5,25 +5,24 @@ import java.util.Random;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    public Thread gameThread;
-    public Image image;
-    public Graphics graphics;
-    public Random random;
-    public Paddle paddle1;
-    public Paddle paddle2;
-    public Ball ball;
-    public Score score;
+    private Thread gameThread;
+    private Image image;
+    private Graphics graphics;
+    private Paddle paddle1;
+    private Paddle paddle2;
+    private Ball ball;
+    private Score score;
 
 
 
-    GamePanel(){
+    public GamePanel(){
 
         newPaddles();
         newBall();
-        score = new Score(Constants.GAME_WIDTH,Constants.GAME_HEIGHT);
+        score = new Score(Def.GAME_WIDTH, Def.GAME_HEIGHT);
         this.setFocusable(true);
         this.addKeyListener(new actionListener());
-        this.setPreferredSize(Constants.SCREEN_SIZE);
+        this.setPreferredSize(Def.SCREEN_SIZE);
 
         gameThread = new Thread(this);
         gameThread.start();
@@ -31,22 +30,22 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void newBall(){
-        random = new Random();
-        ball = new Ball((Constants.GAME_WIDTH/2)-(Constants.BALL_DIAMETER/2),
-                random.nextInt(Constants.GAME_HEIGHT-Constants.BALL_DIAMETER),
-                Constants.BALL_DIAMETER,Constants.BALL_DIAMETER);
+        Random random = new Random();
+        ball = new Ball((Def.GAME_WIDTH/2)-(Def.BALL_DIAMETER/2),
+                random.nextInt(Def.GAME_HEIGHT- Def.BALL_DIAMETER),
+                Def.BALL_DIAMETER, Def.BALL_DIAMETER);
 
     }
     public void newPaddles(){
 
         paddle1 = new Paddle
                 (       0,
-                        (Constants.GAME_HEIGHT/2)-(Constants.PADDLE_HEIGHT/2),Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT,
+                        (Def.GAME_HEIGHT/2)-(Def.PADDLE_HEIGHT/2), Def.PADDLE_WIDTH, Def.PADDLE_HEIGHT,
                         1);
 
         paddle2 = new Paddle
-                (       Constants.GAME_WIDTH-Constants.PADDLE_WIDTH,
-                        (Constants.GAME_HEIGHT/2)-(Constants.PADDLE_HEIGHT/2), Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT,
+                (       Def.GAME_WIDTH- Def.PADDLE_WIDTH,
+                        (Def.GAME_HEIGHT/2)-(Def.PADDLE_HEIGHT/2), Def.PADDLE_WIDTH, Def.PADDLE_HEIGHT,
                         2);
 
 
@@ -78,7 +77,7 @@ public class GamePanel extends JPanel implements Runnable {
         if(ball.y <= 0){
             ball.setYDirection(-ball.yVelocity);
         }
-        if(ball.y >= Constants.GAME_HEIGHT-Constants.BALL_DIAMETER){
+        if(ball.y >= Def.GAME_HEIGHT- Def.BALL_DIAMETER){
             ball.setYDirection(-ball.yVelocity);
         }
         if(ball.intersects(paddle1)){
@@ -103,14 +102,14 @@ public class GamePanel extends JPanel implements Runnable {
         if(paddle1.y<=0){
             paddle1.y = 0;
         }
-        if(paddle1.y>= (Constants.GAME_HEIGHT-Constants.PADDLE_HEIGHT)){
-            paddle1.y = Constants.GAME_HEIGHT-Constants.PADDLE_HEIGHT;
+        if(paddle1.y>= (Def.GAME_HEIGHT- Def.PADDLE_HEIGHT)){
+            paddle1.y = Def.GAME_HEIGHT- Def.PADDLE_HEIGHT;
         }
         if(paddle2.y<=0){
             paddle2.y = 0;
         }
-        if(paddle2.y>= (Constants.GAME_HEIGHT-Constants.PADDLE_HEIGHT)){
-            paddle2.y = Constants.GAME_HEIGHT-Constants.PADDLE_HEIGHT;
+        if(paddle2.y>= (Def.GAME_HEIGHT- Def.PADDLE_HEIGHT)){
+            paddle2.y = Def.GAME_HEIGHT- Def.PADDLE_HEIGHT;
         }
         //give a player 1 point and creates new paddles & ball
         if(ball.x <= 0){
@@ -119,7 +118,7 @@ public class GamePanel extends JPanel implements Runnable {
             newBall();
             System.out.println("Player 2:" + score.player2);
         }
-        if(ball.x >= Constants.GAME_WIDTH-Constants.BALL_DIAMETER){
+        if(ball.x >= Def.GAME_WIDTH- Def.BALL_DIAMETER){
             score.player1++;
             newPaddles();
             newBall();
